@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -7,43 +8,39 @@
     <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <title>Hello World</title>
 </head>
+
 <body>
     <div class="" id="app">
-        
+
     </div>
 
     <script type="text/babel">
-        class App extends React.Component {
+        class App  extends React.Component {
 
-            // Data State
             state = {
                 name: 'Ryu',
                 age: 30
             }
 
-            //DOM Events
-            handleClick(e){
-                console.log(e.target)
+            handleChangeInput = (e) => {
+                this.setState({
+                    name: e.target.value
+                })
             }
 
-            handleMouseOver(e){
-                console.log(e);                
-            }
-
-            handleCopy(e){
-                console.log(e.target);
-                
+            handleSubmit = (e) => {
+                e.preventDefault()
+                console.log(this.state.name);
             }
 
             render() {
                 return (
                     <div className="app-content">
-                        <h1>Hello World</h1>
-                        <p>{ Math.random() * 10 }</p>
-                        <p>My name is: { this.state.name } and I am: { this.state.age }</p>
-                        <button onClick={ this.handleClick }>Click me!</button>
-                        <button onMouseOver={ this.handleMouseOver }>Hover me</button>
-                        <p onCopy={ this.handleCopy }>Copy event:</p>
+                        <h1>My name is { this.state.name }</h1>
+                        <form onSubmit = {this.handleSubmit}>
+                            <input type="text" onChange={ this.handleChangeInput }/>
+                            <button>Submit</button>
+                        </form>
                     </div>
                 )
             }
@@ -52,5 +49,5 @@
         ReactDOM.render(<App/>, document.getElementById('app'))
     </script>
 </body>
-</html>
 
+</html>
